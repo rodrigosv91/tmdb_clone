@@ -1,0 +1,10 @@
+.home {
+  padding: 20px;
+}
+.home__category {
+  margin-bottom: 20px;
+}
+.home__movies {
+  display: flex;
+  overflow-x: scroll;
+}

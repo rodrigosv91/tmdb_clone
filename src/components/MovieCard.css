@@ -1,0 +1,11 @@
+.movieCard {
+  display: flex;
+}
+.movieCard__image {
+  width: 150px;
+  margin-right: 10px;
+  transition: transform 0.2s;
+}
+.movieCard__image:hover {
+  transform: scale(1.1);
+}
