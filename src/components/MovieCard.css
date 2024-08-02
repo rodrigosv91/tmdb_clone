@@ -1,11 +1,13 @@
 .movieCard {
-  display: flex;
-}
-.movieCard__image {
-  width: 150px;
+  flex: 0 0 auto;
   margin-right: 10px;
-  transition: transform 0.2s;
 }
-.movieCard__image:hover {
+
+.movieCard__poster {
+  width: 150px;
+  transition: transform 0.3s;
+}
+
+.movieCard__poster:hover {
   transform: scale(1.1);
 }
