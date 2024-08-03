@@ -1,46 +1,59 @@
-/* src/components/NavBar.css */
 .nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
-  background-color: #141414;
+  background-color: #111;
+  color: #fff;
 }
+
 .nav__logo {
   width: 100px;
 }
+
 .nav__search {
-  margin-left: auto;
-  padding: 5px;
+  background-color: #333;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-/* src/pages/Home.css */
-.home {
-  padding: 20px;
+.nav__dropdown {
+  position: relative;
 }
-.home__category {
-  margin-bottom: 20px;
+
+.nav__dropdownButton {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-.home__movies {
+
+.nav__menuIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.nav__dropdownContent {
   display: flex;
-  overflow-x: scroll;
+  flex-direction: column;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #333;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-/* src/components/MovieCard.css */
-.movieCard {
-  display: flex;
-}
-.movieCard__image {
-  width: 150px;
-  margin-right: 10px;
-  transition: transform 0.2s;
-}
-.movieCard__image:hover {
-  transform: scale(1.1);
+.nav__dropdownContent button {
+  padding: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
 }
 
-/* src/pages/MovieDetail.css */
-.movieDetail {
-  padding: 20px;
+.nav__dropdownContent button:hover {
+  background-color: #444;
 }

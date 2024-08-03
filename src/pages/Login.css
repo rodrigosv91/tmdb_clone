@@ -1,0 +1,54 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("../assets/images/background.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.login__logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.login h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para contraste */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.login input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.login button {
+  padding: 10px 20px;
+  background-color: #e50914;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  width: 320px;
+}
+
+.login button:hover {
+  background-color: #f40612;
+}
