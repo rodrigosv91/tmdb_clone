@@ -1,59 +1,48 @@
-import React, { useState, useEffect } from "react";
+// src/App.js
+import React, { useState, useContext } from "react";
 import {
   BrowserRouter as Router,
-  Routes,
   Route,
+  Routes,
   Navigate,
 } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
-import Login from "./pages/Login";
-import "./App.css";
+import NavBar from "./components/NavBar";
+import AuthContext from "./contexts/AuthContext";
 
-function App() {
+const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuthenticated") === "true"
-  );
-
-  useEffect(() => {
-    setIsAuthenticated(localStorage.getItem("isAuthenticated") === "true");
-  }, []);
-
+  const { isAuthenticated } = useContext(AuthContext);
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
-
   return (
     <Router>
-      <div className="app">
-        {isAuthenticated && <NavBar onSearch={handleSearch} />}
-        <Routes>
-          <Route
-            path="/login"
-            element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/"
-            element={
-              isAuthenticated ? (
-                <Home searchTerm={searchTerm} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/movie/:id"
-            element={
-              isAuthenticated ? <MovieDetail /> : <Navigate to="/login" />
-            }
-          />
-        </Routes>
-      </div>
+      {isAuthenticated && <NavBar onSearch={handleSearch} />}
+      <Routes>
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+        />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Home searchTerm={searchTerm} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/movie/:id"
+          element={isAuthenticated ? <MovieDetail /> : <Navigate to="/login" />}
+        />
+      </Routes>
     </Router>
   );
-}
+};
 
 export default App;

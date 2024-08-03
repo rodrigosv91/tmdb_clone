@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import AuthContext from "../contexts/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("isAuthenticated") === "true") {
-      navigate("/");
-    }
-  }, [navigate]);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    // Simular login bem-sucedido
-    localStorage.setItem("isAuthenticated", "true");
-    window.location.reload(); // Forçar recarregamento para atualizar o estado de autenticação
+    //resultadoRequisicao = fetchLogin();
+    //if (resultadoRequisicao == sucesso)
+    login();
+    //else
+    //informar erro
+    navigate("/");
   };
 
   return (
