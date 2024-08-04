@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import tmdb from "../tmdb";
 import "./MovieDetail.css";
 
 const MovieDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
 
@@ -27,6 +28,10 @@ const MovieDetail = () => {
 
   if (!movie) return <div>Loading...</div>;
 
+  const handleBackClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div
       className="movieDetail"
@@ -36,24 +41,29 @@ const MovieDetail = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="movieDetail__overlay">
-        <div className="movieDetail__content">
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-          <p>Rating: {movie.vote_average}</p>
-          <p>Release Date: {movie.release_date}</p>
-          <h2>Cast</h2>
-          <div className="movieDetail__cast">
-            {cast.slice(0, 10).map((actor) => (
-              <div key={actor.id} className="movieDetail__castMember">
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                  alt={actor.name}
-                  className="movieDetail__castImage"
-                />
-                <p>{actor.name}</p>
-              </div>
-            ))}
+      <div className="movieDetail__container">
+        <button className="back-button" onClick={handleBackClick}>
+          Voltar
+        </button>
+        <div className="movieDetail__overlay">
+          <div className="movieDetail__content">
+            <h1>{movie.title}</h1>
+            <p>{movie.overview}</p>
+            <p>Rating: {movie.vote_average}</p>
+            <p>Release Date: {movie.release_date}</p>
+            <h2>Cast</h2>
+            <div className="movieDetail__cast">
+              {cast.slice(0, 10).map((actor) => (
+                <div key={actor.id} className="movieDetail__castMember">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                    alt={actor.name}
+                    className="movieDetail__castImage"
+                  />
+                  <p>{actor.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
