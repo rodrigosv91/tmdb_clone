@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 instance.defaults.params = {};
-instance.defaults.params["api_key"] = "ce98f434297ccfbb879ebff4a364ee98"; // substitua pela sua chave da API
+instance.defaults.params["api_key"] = process.env.REACT_APP_TMDB_API_KEY;
 instance.defaults.params["language"] = "pt-BR";
 
 export default instance;
