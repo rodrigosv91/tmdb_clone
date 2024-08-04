@@ -1,22 +1,50 @@
+/* NavBar.css */
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
   background-color: #111;
-  color: #fff;
 }
 
 .nav__logo {
   width: 100px;
 }
 
+.nav__searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .nav__search {
+  padding: 10px 40px 10px 10px; /* Adiciona espaço extra à direita para o botão "X" */
+  border: 1px solid #555;
+  border-radius: 20px;
   background-color: #333;
   color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.nav__search:focus {
+  border-color: #777;
+}
+
+.nav__clearSearch {
+  position: absolute;
+  right: 10px;
+  background: none;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav__clearSearch:hover {
+  color: #fff;
 }
 
 .nav__dropdown {
@@ -29,31 +57,29 @@
   cursor: pointer;
 }
 
-.nav__menuIcon {
-  width: 25px;
-  height: 25px;
+.nav__dropdownContent {
+  position: absolute;
+  right: 0;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.nav__dropdownContent {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background-color: #333;
-  border-radius: 5px;
-  overflow: hidden;
+.nav__menuIcon {
+  width: 30px;
 }
 
 .nav__dropdownContent button {
-  padding: 10px;
   background: none;
   border: none;
-  color: #fff;
-  text-align: left;
   cursor: pointer;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .nav__dropdownContent button:hover {
-  background-color: #444;
+  background-color: #333;
 }

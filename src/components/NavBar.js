@@ -4,15 +4,25 @@ import AuthContext from "../contexts/AuthContext";
 import "./NavBar.css";
 
 const NavBar = ({ onSearch }) => {
+  const [searchValue, setSearchValue] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const { logout } = useContext(AuthContext);
 
   const handleLogout = () => {
+    setSearchValue("");
+    onSearch("");
     logout();
   };
 
   const handleSearch = (event) => {
-    onSearch(event.target.value);
+    const value = event.target.value;
+    setSearchValue(value);
+    onSearch(value);
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+    onSearch("");
   };
 
   const toggleDropdown = () => {
@@ -24,12 +34,20 @@ const NavBar = ({ onSearch }) => {
       <NavLink to="/">
         <img src="/images/logo.png" alt="Netflix Logo" className="nav__logo" />
       </NavLink>
-      <input
-        type="text"
-        placeholder="Pesquisar"
-        className="nav__search"
-        onChange={handleSearch}
-      />
+      <div className="nav__searchContainer">
+        <input
+          type="text"
+          placeholder="Pesquisar"
+          className="nav__search"
+          value={searchValue}
+          onChange={handleSearch}
+        />
+        {searchValue && (
+          <button className="nav__clearSearch" onClick={clearSearch}>
+            X
+          </button>
+        )}
+      </div>
       <div className="nav__dropdown">
         <button className="nav__dropdownButton" onClick={toggleDropdown}>
           <img
