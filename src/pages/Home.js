@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import tmdb from "../tmdb";
+import {
+  fetchTopRatedMovies,
+  fetchGenres,
+  fetchMoviesByGenre,
+  fetchSearchResults,
+} from "../tmdb";
 import MovieCard from "../components/MovieCard";
 import "./Home.css";
 
@@ -10,21 +15,23 @@ const Home = ({ searchTerm }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requests = [
-          tmdb.get("/movie/top_rated"),
-          tmdb.get("/genre/movie/list"),
-        ];
-        const [topRated, genres] = await Promise.all(requests);
+        const [topRated, genres] = await Promise.all([
+          fetchTopRatedMovies(),
+          fetchGenres(),
+        ]);
 
-        const categoriesData = genres.data.genres.map((genre) => {
-          return {
-            title: genre.name,
-            fetchUrl: `/discover/movie?with_genres=${genre.id}`,
-          };
-        });
+        const categoriesData = await Promise.all(
+          genres.data.genres.map(async (genre) => {
+            const moviesByGenre = await fetchMoviesByGenre(genre.id);
+            return {
+              title: genre.name,
+              movies: moviesByGenre.data.results,
+            };
+          })
+        );
 
         setCategories([
-          { title: "Mais Votados", fetchUrl: "/movie/top_rated" },
+          { title: "Mais Votados", movies: topRated.data.results },
           ...categoriesData,
         ]);
       } catch (error) {
@@ -39,18 +46,16 @@ const Home = ({ searchTerm }) => {
     if (searchTerm === "") {
       setFilteredMovies([]);
     } else {
-      const fetchSearchResults = async () => {
+      const fetchSearchResultsAsync = async () => {
         try {
-          const response = await tmdb.get("/search/movie", {
-            params: { query: searchTerm },
-          });
+          const response = await fetchSearchResults(searchTerm);
           setFilteredMovies(response.data.results);
         } catch (error) {
           console.error("Erro ao buscar resultados da pesquisa:", error);
         }
       };
 
-      fetchSearchResults();
+      fetchSearchResultsAsync();
     }
   }, [searchTerm]);
 
@@ -70,7 +75,9 @@ const Home = ({ searchTerm }) => {
           <div className="home__category" key={category.title}>
             <h2>{category.title}</h2>
             <div className="home__movies">
-              <MovieCard fetchUrl={category.fetchUrl} />
+              {category.movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
             </div>
           </div>
         ))
