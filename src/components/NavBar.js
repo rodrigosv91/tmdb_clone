@@ -56,7 +56,7 @@ const NavBar = ({ onSearch }) => {
         </button>
         {showDropdown && (
           <div className="nav__dropdownContent">
-            <button onClick={handleLogout}>Deslogar da conta Netflix</button>
+            <button onClick={handleLogout}>Deslogar da conta</button>
           </div>
         )}
       </div>
