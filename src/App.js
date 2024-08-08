@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useContext } from "react";
 import {
   BrowserRouter as Router,
@@ -19,7 +18,7 @@ const App = () => {
     setSearchTerm(term);
   };
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       {isAuthenticated && <NavBar onSearch={handleSearch} />}
       <Routes>
         <Route
