@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import "./NavBar.css";
+import logo from "../assets/images/logo.png";
+import menu_icon from "../assets/images/menu-icon.png";
 
 const NavBar = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -32,7 +34,7 @@ const NavBar = ({ onSearch }) => {
   return (
     <div className="nav">
       <NavLink to="/">
-        <img src="/images/logo.png" alt="Netflix Logo" className="nav__logo" />
+        <img src={logo} alt="Netflix Logo" className="nav__logo" />
       </NavLink>
       <div className="nav__searchContainer">
         <input
@@ -50,11 +52,7 @@ const NavBar = ({ onSearch }) => {
       </div>
       <div className="nav__dropdown">
         <button className="nav__dropdownButton" onClick={toggleDropdown}>
-          <img
-            src="/images/menu-icon.png"
-            alt="Menu"
-            className="nav__menuIcon"
-          />
+          <img src={menu_icon} alt="Menu" className="nav__menuIcon" />
         </button>
         {showDropdown && (
           <div className="nav__dropdownContent">
